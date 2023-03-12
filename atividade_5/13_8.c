@@ -1,29 +1,30 @@
 /*
-Nesse cÛdigo, percorremos em pÛs-ordem, onde visita os filhos esquerdos,
+Quest√£o: Validar express√£o num√©rica em uma √°rvore bin√°ria.
+Nesse c√≥digo, percorremos em p√≥s-ordem, onde visita os filhos esquerdos,
 depois os direitos e depois a raiz.
-A raiz, deve ser a operaÁ„o que une as duas expressıes menores, nesse caso,
-A raiz È o *, pois ela une as expressıes menores ((5 + 3) / 4) e (6 - 2),
-A raiz da segunda express„o mais importante em pÛs Ûrdem È o /, pois une
-as expressıes menores (5 + 3) e ao final (5 + 3) / 4.
-Como o algoritmo È pÛs-ordem, ele verifica primeiro o filho mais ‡ esquerda
-da ·rvore que È o 5, depois vai pro filho "emparelhado" ‡ ele mas ‡ direita
-que È o 3, e por fim visita a raiz da sub·rvore que È o +.
-Assim que executa, essa express„o que temos como resultado 8. O 8 se torna o
-nÛ mais ‡ esquerda da ·rvore.
-Realizando novamente o pÛs ordem, pegamos o mais ‡ esquerda que È 8, o
-"emparelhado" ‡ ele que È o 4 e a raiz da sub·rvore que È o /, assi, formamos
-8 / 4 e o resultado 2. 2 se torna o nÛ mais ‡ esquerda da ·rvore.
-A parte esquerda da ·rvore foi resolvida, agora, passar· para a direita,
-com o 6 sendo o nÛ mais ‡ esquerda e que n„o possui filhos, pega o "emparelhado"
-‡ ele, o 1 e como temos na raiz da sub·rvore o -, basta realizar o 6 - 2 e como
+A raiz, deve ser a opera√ß√£o que une as duas express√µes menores, nesse caso,
+A raiz √© o *, pois ela une as express√µes menores ((5 + 3) / 4) e (6 - 2),
+A raiz da segunda express√£o mais importante em p√≥s √≥rdem √© o /, pois une
+as express√µes menores (5 + 3) e ao final (5 + 3) / 4.
+Como o algoritmo √© p√≥s-ordem, ele verifica primeiro o filho mais √† esquerda
+da √°rvore que √© o 5, depois vai pro filho "emparelhado" √† ele mas √† direita
+que √© o 3, e por fim visita a raiz da sub√°rvore que √© o +.
+Assim que executa, essa express√£o que temos como resultado 8. O 8 se torna o
+n√≥ mais √† esquerda da √°rvore.
+Realizando novamente o p√≥s ordem, pegamos o mais √† esquerda que √© 8, o
+"emparelhado" √† ele que √© o 4 e a raiz da sub√°rvore que √© o /, assi, formamos
+8 / 4 e o resultado 2. 2 se torna o n√≥ mais √† esquerda da √°rvore.
+A parte esquerda da √°rvore foi resolvida, agora, passar√° para a direita,
+com o 6 sendo o n√≥ mais √† esquerda e que n√£o possui filhos, pega o "emparelhado"
+√† ele, o 1 e como temos na raiz da sub√°rvore o -, basta realizar o 6 - 2 e como
 resultado 5.
-Por fim, seguindo pÛs ordem: 2 * 4 = 8.
+Por fim, seguindo p√≥s ordem: 2 * 4 = 8.
 
-O cÛdigo pega os dados como char, mas na linha 47, ele transforma em int,
-diminuindo por 0, porÈm, sÛ faz isso, se o nÛ n„o tiver nenhum filho, pois
-assim, temos certeza que È um inteiro
+O c√≥digo pega os dados como char, mas na linha 47, ele transforma em int,
+diminuindo por 0, por√©m, s√≥ faz isso, se o n√≥ n√£o tiver nenhum filho, pois
+assim, temos certeza que √© um inteiro
 
-Caso n„o apareÁa resultado, È porquÍ a expres„o montada, est· inv·lida
+Caso n√£o apare√ßa resultado, √© porqu√™ a expres√£o montada, est√° inv√°lida
 */
 
 #include <stdio.h>
@@ -35,7 +36,7 @@ struct Node {
     struct Node* right;
 };
 
-// FunÁ„o para criar um novo nÛ na ·rvore
+// Fun√ß√£o para criar um novo n√≥ na √°rvore
 struct Node* newNode(char data) {
     struct Node* node = (struct Node*) malloc(sizeof(struct Node));
     node->data = data;
@@ -44,18 +45,18 @@ struct Node* newNode(char data) {
     return node;
 }
 
-// FunÁ„o para avaliar uma express„o numÈrica na ·rvore
+// Fun√ß√£o para avaliar uma express√£o num√©rica na √°rvore
 int evalExprTree(struct Node* node) {
-    // Se o nÛ for uma folha, retorna o valor numÈrico correspondente
+    // Se o n√≥ for uma folha, retorna o valor num√©rico correspondente
     if (node->left == NULL && node->right == NULL) {
         return node->data - '0'; // Converte de caractere para inteiro
     }
 
-    // Avalia as sub·rvores esquerda e direita recursivamente
+    // Avalia as sub√°rvores esquerda e direita recursivamente
     int leftValue = evalExprTree(node->left);
     int rightValue = evalExprTree(node->right);
 
-    // Realiza a operaÁ„o aritmÈtica correspondente ao nÛ atual
+    // Realiza a opera√ß√£o aritm√©tica correspondente ao n√≥ atual
     switch (node->data) {
         case '+': return leftValue + rightValue;
         case '-': return leftValue - rightValue;
@@ -67,7 +68,7 @@ int evalExprTree(struct Node* node) {
 }
 
 int main() {
-    // Cria a ·rvore para a express„o "((5 + 3) / 4 * (6 + 1)"
+    // Cria a √°rvore para a express√£o "((5 + 3) / 4 * (6 + 1)"
     struct Node* root = newNode('*');
     root->left = newNode('/');
     root->left->left = newNode('+');
@@ -78,7 +79,7 @@ int main() {
     root->right->left = newNode('6');
     root->right->right = newNode('2');
 
-    // Avalia a express„o e imprime o resultado
+    // Avalia a express√£o e imprime o resultado
     int result = evalExprTree(root);
     printf("Resultado da expressao: %d\n", result);
 
